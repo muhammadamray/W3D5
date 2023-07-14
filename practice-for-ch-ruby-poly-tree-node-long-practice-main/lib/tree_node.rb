@@ -29,4 +29,16 @@ class PolyTreeNode
         raise "error!" if !child.value.include?("child")
     end
 
+
+    def dfs(target)
+        return self if self.value == target
+
+        self.children.each do |child|
+            res = child.dfs(target)
+            return res if res != nil
+        end 
+
+        nil
+
+    end
 end
