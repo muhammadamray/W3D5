@@ -41,4 +41,24 @@ class PolyTreeNode
         nil
 
     end
+
+    def bfs(target)
+        array = []
+        array << self
+        while array.length > 0
+            curr = array.shift
+            if curr.value == target
+                return curr
+            else
+                array += curr.children
+            end
+        end
+        nil
+    end 
+
+
+
+
+
+
 end
