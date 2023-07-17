@@ -20,17 +20,41 @@ class KnightPathFinder
         MOVES.each do |(dx, dy)|
             new_position = [(current_x + dx), (current_y + dy)]
             valid << new_position if new_position.all? {|coord| coord.between? (0, 7)}
-
-
         end 
     end
 
     def initialize(position) # [a, b]
         @root_node = position
-        @grid = Array.new(8) {Array.new(8)}
+        @considered_positions = [start_pos]
+
+        build_move_tree
     end
 
+    sttr_accesor :root_node, :considered_positions
+
     def build_move_tree
+        self.root_node = PolyTreeNode.new(start_pos)
+
+        nodes = [root_node]
+        until nodes.empty? 
+            current_node = nodes.shift 
+
+            current_pos = current_node.value
+            new_move_positions(current_pos).each do |next_pos|
+                next_node = PolyTreeNode.new(next_pos)
+                current_node.add_child(next_node)
+                nodes << next_node
+            end 
+        end 
+    end 
+    
+            
+        
+
+
+
+
+
 
     end
 end
